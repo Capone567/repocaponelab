@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+         // SEGUNDA PARTE DE EJERCICIOS
+
+        let ciudades = ["Roma","BA","NY","SP"]
+        let ultimoElemento;
+        ultimoElemento = ciudades.pop();
+        console.log(ultimoElemento);
+
+        let num = [10,20,30]
+        num.pop();
+        num.pop();
+        console.log(num);
+
+        let hogarTareas = ["Barrer","Concinar","Limpiar"]
+        let tareaCom = hogarTareas.pop();
+        document.writeln("Tarea " + tareaCom + " fue completada")
+
+        let vacio = [];
+        vacio.pop();
+        console.log(vacio)
+
+        let numeros = [5,3,4,6,7]
+        while (numeros.length > 0){
+            numeros.pop();
+        }
+        console.log(numeros);
+
+        let notasMusicales = ["FA","DO","ME","SOL","LA"]
+        notasMusicales.pop();
+        console.log(notasMusicales);
+        notasMusicales.push("DO");
+        console.log(notasMusicales);
+
+        function quitarUltimo(array){
+            array.pop()
+            return array;
+        }
+        let cinco = [1,2,3]
+        console.log(cinco);
+        console.log(quitarUltimo(cinco));
+
+        let dias = ["D","L","M","X","J","V","S"]
+        let borrar = dias.indexOf("D")
+        console.log(borrar)
+        dias.splice(borrar,1);
+        console.log(dias);
+
+        let nombres = ["Laura","Juan","Fabricio"]
+        console.log(nombres.pop());
+
+    </script>
+</body>
+</html>

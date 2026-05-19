@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function restar(n1,n2){
+            return (n1 - n2);
+        }
+        
+        function esNegativo(){
+            if (numero < 0)
+                return true;
+            return false;
+        }
+
+        function invertirBool(valor){
+            if (valor == true)
+                return false;
+            return true;
+        }
+
+        function promedio(n1,n2,n3){
+            return ((n1+n2+n3)/3);
+        }
+
+        function descuento(precio, porcentaje){
+            return ((precio * porcentaje)/100)
+        }
+
+        function esVocal(letra){
+            if (letra == 'a')
+                return true;
+            else 
+                return false;
+        }
+
+        function repetir(str, n){
+            return (str + n + str + n);
+        }
+
+        function deKilAMetro(kilometro){
+            return (kilometro*1000);
+        }
+
+
+        numero1 = prompt("Numero");
+        numero2 = prompt("Restarle");
+        restar(numero1,numero2) = calculo
+        document.writeln( "La resta de" + numero1 + "-" + numero2 + "es igual" + calculo + "<br>" );
+
+        
+        number = prompt("Numero");
+        calculo = esNegativo(number)  ;
+        document.writeln( "El numero es menor a 0?" + calculo + "<br>" );
+
+        t = false;
+        bool = invertirBool(t);
+        document.writeln( "Lo contrario de el valor" + bool + "<br>" );
+
+
+        
+        number1 = prompt("Numero");
+        number2 = prompt("Numero");
+        number3 = prompt("Numero");
+        promediado = promedio(number1,number2,number3);
+        document.writeln( "El promedio es: " + promediado + "<br>" );
+
+
+        precio = prompt("Numero");
+        porcen = prompt("Descuento");
+        precioFinal = descuento(precio, porcen);
+        document.writeln( "Con descuento seria " + precioFinal + "<br>" );
+
+        l = prompt("Letra");
+        vocal = esVocal(l)  ;
+        document.writeln( "Es vocal?: " + calculo + "<br>" );
+
+        text = prompt("texto");
+        numeroS = prompt("numero");
+        precioFinal = repe(precio, porcen);
+        document.writeln( "Con descuento seria " + precioFinal + "<br>" );
+
+        
+        kil = prompt("Cuantos kilometros3");
+        vocal = esVocal(l)  ;
+        document.writeln( "Es vocal?: " + calculo + "<br>" );
+
+
+
+    </script>
+</body>
+</html>

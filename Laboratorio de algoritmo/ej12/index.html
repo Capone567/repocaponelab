@@ -1,0 +1,54 @@
+actividad buscar e identificar cuando este por encima de otro numero con el cursor que se ilumine la cuenta
+ej: si estoy en el 9 que se ilimene el 3x3
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        table {
+            background-color: blue;
+            margin-top: 20px;
+        }
+        td {
+            padding: 10px;
+            background-color: aqua;
+        }
+        td.hover{
+            background-color: gray;
+        }
+    </style>
+</head>
+<body>
+    <div id="mostrar">
+
+    </div>
+   
+</body>
+    <script>
+       function iluminar(fila, columna){
+         document.getElementById(fila +",1").style.background = "gray";
+         document.getElementById("1," + columna).style.background = "gray";
+      }
+        function limpiar(fila , columna){
+         document.getElementById(fila+ ",1").style.background = "aqua";
+         document.getElementById("1,"+columna).style.background = "aqua";
+      }
+            str = "<table border=1>";
+
+            for(row = 1; row < 10; row++) {
+                str += "<tr>";
+                for(col = 1; col < 10; col++)
+                {
+                    str += `<td  id="${row},${col}" onmouseover="iluminar(${row},${col})" onmouseout="limpiar(${row},${col})">${row*col}</td>`;
+                }
+
+                str += "</tr>";
+            }
+            str += "</table>";
+
+            document.getElementById("mostrar").innerHTML = str;
+    </script>
+</html>

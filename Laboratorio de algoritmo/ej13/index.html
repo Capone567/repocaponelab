@@ -1,0 +1,163 @@
+<!-- 1. Saludar: Recibir un nombre y devolver "Hola [nombre]".
+2. Duplicar: Recibir un número y devolver su doble.
+3. Mayoría de edad: Recibir una edad y devolver true si es 18 o más.
+4. Área Rectángulo: Recibir ancho y alto, devolver el área.
+5. Celsius a Fahrenheit: Recibir grados C y devolver grados F ($C \times 1.8 + 32$).
+6. Calcular IVA: Recibir un precio y devolverlo con el 21% extra.
+7. Saludo horario: Recibir una hora (0-23) y devolver "Buenos días/tardes/noches".
+8. Par o Impar: Recibir un número y decir si es par (true/false).
+9. Tiempo: Recibir minutos y devolver el equivalente en segundos.
+10. Contar: Recibir un texto y devolver el número de caracteres que contiene. -->
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <br><br><br><br>
+    <div id="nombre"></div><br><br><br>
+
+    <div id="doble"></div><br><br><br><br>
+
+    <div id="edad"></div><br><br><br><br>
+
+    <div id="area"></div><br><br><br><br>
+
+    <div id="grados"></div><br><br><br><br>
+
+    <div id="IVA"></div><br><br><br><br>
+
+    <div id="saludo"></div><br><br><br><br>
+
+    <div id="comprobar"></div><br><br><br><br>
+
+    <div id="segundos"></div><br><br><br><br>
+
+    <div id="caracteres"></div><br><br><br><br>
+
+    <script>
+        function nombre(str) {
+            return "Hola " + str;
+        }
+        let nombre_Usario = prompt("ingrese un nombre");
+        document.getElementById("nombre").innerHTML = nombre(nombre_Usario);
+
+        function multi(num) {
+            return (num * 2)
+        }
+        let numero = prompt("Ingrse numero")
+        document.getElementById("doble").innerHTML = "El doble es: " + multi(numero);
+
+
+
+
+        function mayor(num) {
+            if (num < 18)
+                return false
+            else
+                return true
+        }
+        let edad = prompt("Ingrese su edad");
+        if (mayor(edad) == true)
+            document.getElementById("edad").innerHTML = "Sos mayor"
+        else
+            document.getElementById("edad").innerHTML = "Sos menor"
+
+
+
+
+
+
+        function rect(ancho, alto) {
+            return (ancho * alto);
+        }
+        let anc = parseInt(prompt("Ancho"));
+        let alt = parseInt(prompt("alto"));
+        document.getElementById("area").innerHTML = "El area es: " + rect(anc, alt);
+
+
+
+
+
+
+
+        function pase(grade) {
+            return Math.round((grade / 1.8 + 32));
+        }
+        let c = parseInt(prompt("grado"));
+        document.getElementById("grados").innerHTML = "En faren seria: " + pase(c);
+
+
+
+
+
+
+        function cuenta(num) {
+            return (num = num + (num * 1.21));
+        }
+        let plate = parseInt(prompt("PLATA"));
+        document.getElementById("IVA").innerHTML = "Con iva seria: " + cuenta(plate);
+
+
+        function saludo(hora) {
+            hora = hora[0] + hora[1];
+            if (hora > 12 && hora < 20) {
+                return "Buenas tades ";
+            }
+
+            if (hora < 12) {
+                return "Buenos dias";
+            }
+
+            if (hora => 20) {
+                return "Buenas noches";
+            }
+        }
+        let horario = prompt("ingrese la hora en formato: 12-00");
+        document.getElementById("saludo").innerHTML = saludo(horario);
+
+
+
+
+
+
+
+
+        function comprobar(num) {
+            if (num % 2 == 0)
+                return true
+            else
+                return false
+        }
+        let number = parseInt(prompt("Ingrse un numero"));
+        if (comprobar(number) == true)
+            document.getElementById("comprobar").innerHTML = "Es par"
+        else
+            document.getElementById("comprobar").innerHTML = "Es impar"
+
+        
+        
+         function segundos(min) {
+            return Math.round((min * 60));
+        }
+        let minutos = parseInt(prompt("Ponga los minutos"));
+        document.getElementById("segundos").innerHTML = "Son: " + segundos(minutos) + " segundos";
+
+
+
+
+
+        function carac(palabra){
+            return palabra.length;
+        }
+        let pal = prompt("Ingrse una palbra")
+        document.getElementById("caracteres").innerHTML = "Tiene unos: "+carac(pal)+" caracteres"
+    
+    </script>
+</body>
+
+</html>

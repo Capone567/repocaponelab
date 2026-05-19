@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+           const ascensor = {
+            piso: 0,
+            subir() {
+                if(this.piso < 10)
+                    this.piso++
+            },
+            bajar() {
+                if(this.piso > 0)
+                    this.piso--
+            }
+        }
+
+        const cafe = {
+            lleno : true,
+            tomar(){
+                if (this.lleno == false){
+                    console.log("El vaso esta vacio");
+                }
+                else{
+                    this.lleno = false;
+                }
+            },
+            rellenar(){
+                if (this.lleno == true){
+                    console.log("El vaso ya esta lleno")
+                }
+                else{
+                    this.lleno = true;
+                }
+            }
+        }
+
+        const semaforo = {
+            color: "verde",
+            cambiar(){switch(this.color){
+                case "verde":
+                    this.color = "amarillo"
+                    break;
+                case "amarillo":
+                    this.color = "rojo"
+                    break;
+                case "rojo":
+                    this.color = "verde"
+                    break;
+            }}
+        }
+
+        const vidas = {
+            vida: 3,
+            perdervida(){
+                this.vida=- 1;
+                console.log("El jugador perdio una vida" + this.vida);
+                if (this.vida == 0){
+                    console.log("GAME OVER")
+                }
+            },
+            ganarVida(){
+                this.vida=+1;
+                console.log("El jugador gano una vida" + this.vida);
+            }
+        }
+
+        const alcancia = {
+            monedas: 0,
+            meterMondedas(){
+                this.monedas =+1;
+                console.log(this.monedas);
+            },
+            romper(){
+                console.log(this.monedas + " Habia un total de monedas")
+                this.monedas = 0;
+            }
+        }
+
+        const ventilador = {
+            velocidad: 0,
+            aumentar(){
+                if (this.velocidad == 3){
+                    this.velocidad = 0;
+                    console.log("Se apago el ventilador")
+                }
+            }
+        }
+
+        const registro = {
+            asistencias: 0,
+            entrarAlumno(){
+                this.asistencias =+1;
+            },
+            claseNueva(){
+                this.asistencias = 0;
+            }
+        }
+
+        const bateria = {
+            porcentaje: 100,
+            usarApp(){
+                if (this.bateria==0){
+                    console.log("No hay bateria")
+                }else
+                this.bateria=-5;
+            },
+            cargar(){
+                if (this.bateria == 100){
+                    console.log("bateria completa")
+                }else
+                this.bateria =+10
+            }
+        }
+
+        const perro = {
+            hambre: 50,
+            alimentar(){
+                this.hambre =-10;
+            },
+            jugar(){
+                this.hambre =+15;
+            }
+        }
+
+        const alarma = {
+            sonando: false,
+            activar(){
+                this.sonando=true;
+            },
+            apagar(){
+                this.sonadno = false;
+            }
+        }
+    </script>
+</body>
+</html>

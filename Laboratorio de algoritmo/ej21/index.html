@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+const podometro = {
+     
+    pasos: 0,
+
+     
+    caminar() {
+        this.pasos++;
+        console.log(`Diste un paso. Total: ${this.pasos}`);
+    },
+
+    
+    resetear() {
+        this.pasos = 0;
+    }
+};
+
+console.log("Estado inicial:", podometro.pasos); 
+
+podometro.caminar();
+podometro.caminar();
+podometro.caminar();
+
+
+
+
+
+
+    </script>
+
+
+
+
+</body>
+</html>

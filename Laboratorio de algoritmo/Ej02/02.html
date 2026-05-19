@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link href="css/bootstrap.css" rel="stylesheet" />
+  </head>
+  <body>
+    <input id="num1" type="number" placeholder="Ingrese la temperatura" />
+
+    <input onclick="Temp()" type="button" value="Confirmar" />
+    <br />
+
+    <script>
+      function Temp() 
+      {
+        x = document.getElementById("num1").value;
+        x = parseInt(x);
+
+        if (x <= 15) {
+          document.body.style.backgroundColor = "green";  
+        }
+
+        else if(x >= 16 && x < 30 ) {
+          document.body.style.backgroundColor = "yellow" 
+        }
+
+        else if (x >= 30) {
+          document.body.style.backgroundColor = "red";  
+        }
+    
+      }
+    </script>
+  </body>
+</html>

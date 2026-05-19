@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let numbers = [2,3,4]
+        numbers.unshift(1);
+        numbers.unshift(-1,-2);
+        console.log(numbers);
+
+        let mensajes = ["Hola","¿Como estas?"]
+        mensajes.unshift("bienvenido");
+        console.log(mensajes);
+
+        let mundo = ["mundo"]
+        mundo.unshift("Hola");
+        console.log(mundo)
+
+        console.log([1].unshift(0))
+
+        let usuarios = ["Juan", "Manuel" , "Luis"]
+        usuarios.unshift("id:0");
+        console.log(usuarios);
+
+        let vacio = []
+        vacio.unshift("Frutas","Peras","Manzana")
+        console.log(vacio);
+
+        let nada = []
+        for (x=5; x > 1; x--){
+            nada.shift(x);
+        }
+        console.log(nada);
+
+        let niveles = [2,3]
+        niveles.unshift("Nivel tutorial")
+        console.log(niveles)
+
+        function log (array){
+            array.unshift("log");
+            return array;
+        }
+        let c = [1,2,3,4]
+        console.log((log(c)));
+
+
+
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let meses = ["Ene","Feb","Mar","Abr","May","Jun"]
+        let x =  meses.indexOf("Feb");
+        console.log(x);
+
+        let verano = meses.slice(0,3);
+        
+        console.log(verano.join(" - "));
+
+        arr = verano.concat(meses);
+        console.log(arr)
+
+        if (meses.indexOf(1) !== -1){
+            console.log("existe")
+        }
+        else{
+            console.log("no existe")
+        }
+
+        let copiar = meses.slice(0,3)
+        console.log(copiar);
+
+        let clonar  = meses.slice(0, meses.length);
+        console.log(clonar);
+
+        
+        let z = prompt("Ingrse mensaje")
+          if (meses.indexOf(z) !== -1){
+            console.log(z)
+        }
+        else{
+            console.log("no existe")
+        }
+
+
+        let num = [1,2,3,4,5];
+        let num1 = [6,7,8,9];
+        let num2 = [10,11,12,13];
+
+        let dos = num.concat(num1);
+        let tres = dos.concat(num2);
+        console.log(tres);
+
+    </script>
+</body>
+</html>

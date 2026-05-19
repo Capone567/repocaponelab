@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        const auto = {
+            marca: "Toyota", 
+            modelo: "Corolla",
+            velmax: "220km/h",
+            precio: 30000,
+            color: ("Coloca un color al auto"),
+            encender() { console.log("Vroom!"); },
+            saludo() { console.log("BEEEEP BEEEP, bienvenido señor Kenichi..y capaz Iara")},
+            sumar(num) {console.log (num = num+ 10)},
+            restar(num) {console.log (num =num - 10)},
+            direccion: {
+                concesionario: "Av.Siempreviva 1234",
+                num: "12344",
+            }
+        }; 
+        //console.log(auto.marca)
+        //auto.color = "Blanco";
+        //console.log(auto.color)
+        //auto.saludo();
+        //auto.sumar(1);
+        //auto.restar(2);
+        delete auto.sumar;
+        console.log(auto);
+
+        const frase = {
+            Fecha: "11/12/2021",
+            texto: "La luna es de queso",
+            lugar: "Francia, Paris",
+        }
+        console.log(frase);
+
+      
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function sumar(array, item){
+           array.push(item);
+           return array;
+        }
+
+        let tarea = ["barrer", "lavar" , "limpiar"]
+        tarea.push("aspirar");
+        console.log(tarea);
+
+        tarea.pop();
+        console.log(tarea);
+
+        tarea.unshift("Prender lavaropa");
+        console.log(tarea);
+
+        tarea.shift();
+        console.log(tarea);
+
+        for (x = 0; x < tarea.length ; x++) { 
+            tarea.shift();
+            console.log(tarea);
+        }
+
+        let carrito = ["Huevo","Leche","Manteca"];
+        carrito.push("Cafe");
+        carrito.shift();
+        carrito.unshift("Surtidas");
+
+        let numeros = [];
+        numeros.push(100);
+        numeros.unshift(0);
+
+        console.log(numeros);
+
+        numeros.shift();
+        numeros.unshift(1,2);
+
+        console.log(numeros);
+
+        console.log(sumar(numeros,4))
+
+        let fill = [];
+        for (z = 0; z < 10; z++){
+            fill.push(z);
+            console.log(fill);
+        }
+
+    </script>
+</body>
+</html>

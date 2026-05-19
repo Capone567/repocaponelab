@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="Nueva carpeta/css/bootstrap.css" rel="stylshee">
+</head>
+<body>
+    <input id="num2" type="number" placeholder="Ingrse un numero">
+    <input id="num1" type="number" placeholder="Ingese un numero">
+
+    <input onclick="comparar();" type="button" value="comparar">
+    <br>
+    <div id="resultado"></div>
+
+    <script>
+        function comparar() {
+          y =  document.getElementById("num1").value;
+          x =  document.getElementById("num2").value;
+          if (parseInt(x) < parseInt(y)){
+            document.getElementById("resultado").innerHTML = "El mas grande es la caja 2"
+          }
+
+          else if (parseInt(x) > parseInt(y)){
+            document.getElementById("resultado").innerHTML = "El mas grande es la caja 1"
+          }
+          
+          else {
+            document.getElementById("resultado").innerHTML = "Son iguales"
+          }
+
+         
+        }
+    </script>
+</body>
+</html>

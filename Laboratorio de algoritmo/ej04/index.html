@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h3>Conversor de temperatura</h3>
+    <input type="number" id="grados" placeholder="grados celsios o f">
+    <select id="opcion">
+        <option value="F">A fahrenheit</option>
+        <option value="K">A kelvin</option>
+    </select>
+    <button onclick="convertir()">convertir</button>
+    <p id="resultado"></p>
+
+    <script>
+    function convertir()
+    {
+     if (document.getElementById("grados").value!='')
+      { 
+       var grado = parseInt(document.getElementById("grados").value);
+       
+       switch (document.getElementById("opcion").value)
+        {
+            case "F": 
+                grado = grado * 1.8 + 32;
+                break;
+            case "K":
+                grado = grado + 273.15;
+                break;
+        }
+            document.getElementById("resultado").innerHTML = grado;
+
+      }
+     if  (document.getElementById("grados").value=='')
+      {
+        alert("Ingrese los grados")
+      }
+    }
+    </script>
+</body>
+</html>

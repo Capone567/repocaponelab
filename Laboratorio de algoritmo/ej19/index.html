@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let nombres = ["Thiago", "Fabbiano", "Kenichi", "Gian"];
+        let seleccion;
+        do {
+            seleccion = parseInt(prompt("menu 1. listar 2. Insertar  3.Buscar  4.Eliminar  5. Salir"))
+            switch (seleccion) {
+                case 1:
+                    for (i = 0; i < nombres.length; i++) {
+                        console.log("Poscion: " + i + " Valor: " + nombres[i]);
+                    }
+                    break;
+
+                case 2:
+                    nombres.push(prompt("Ingrse el nuevo nombre"));
+                    break;
+
+                case 3:
+                    let nombreBuscado = nombres.indexOf(prompt("Ingrse el nombre a buscar"))
+                    if (nombreBuscado !== -1) {
+                        console.log("El nombre esta en la posicion " + nombreBuscado);
+                    }
+                    else
+                        console.log("El nombre no existe");
+                    break;
+
+                case 4:
+                    let nombreBuscado1 = nombres.indexOf(prompt("Ingrse el nombre a remover"))
+                    if (nombreBuscado1 !== -1) {
+                        console.log("El nombre de la posicion " + nombreBuscado1 + "Ha sido borrado");
+                        nombres.splice(nombreBuscado1, 1);
+                    }
+                    else
+                        console.log("El nombre no existe");
+                    break;
+
+            }
+
+        } while (seleccion !== 5);
+    </script>
+</body>
+
+</html>

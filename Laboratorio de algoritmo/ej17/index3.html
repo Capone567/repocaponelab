@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // TERCERA PARTE
+        let meses = ["enero","febrero","Marzo"]
+        meses.shift();
+        console.log(meses);
+
+        function atender(array){
+            array.shift();
+            return array
+        }
+        let pacientes = ["Juan","Franco","Luis"]
+        
+        pacientes = atender(pacientes);
+        console.log(pacientes);
+
+        let list = [1,2,3,4,5]
+        resto = list.shift();
+        alert(resto);
+
+
+        let uno = [1];
+        uno.shift();
+        console.log(uno);
+
+
+        let receta = ["Calentar mateca","Prender el horno","Batir","Colocar 150g de harina","Añadir esencia de vainilla"]
+        let completado = receta.shift();
+        console.log("El paso uno completo " + completado)
+
+        let cuatro = [1,2,3,4]
+        cuatro.pop();
+        cuatro.shift();
+        console.log(cuatro);
+
+        let vaciar = [1,2,3,4,5,6,7,8]
+        console.log(vaciar);
+        while (vaciar.length > 0){
+            vaciar.shift();
+        }
+        console.log(vaciar);
+
+
+        // Si, el metodo pop() es más rapido que el shift ya que solo quita el ultimo elemento mientras que el shift tiene que sacar el ultimo
+        // y cambiar las posiciones de todos los elementos restantes
+
+        function ultimo (array){
+            let delta = array.shift()
+            return delta;
+        }
+
+        let ult = [1,2,3,4,5]
+        console.log(ultimo(ult));
+    </script>
+    
+</body>
+</html>

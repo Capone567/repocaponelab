@@ -1,0 +1,119 @@
+    <!-- 1. El método .push() (Añadir al final)
+    Crea un array vacío llamado cesta y añade "Pan".
+    Añade "Leche" y "Huevos" al array cesta en una sola línea.
+    Crea un array con los números [1, 2, 3] y añade el número 4.
+    Dado un array de nombres, añade el nombre de tu mejor amigo al final.
+    Usa un bucle for para hacer push de los números del 1 al 10 en un array nuevo.
+    Crea un array de colores y añade "Gris" usando una variable que contenga ese string.
+    Añade un array pequeño ["a", "b"] dentro de otro array usando push.
+    ¿Qué devuelve la ejecución de [1].push(2)? Guárdalo en una variable y comprueba su valor.
+    Crea una función que reciba un array y un objeto, y haga push del objeto al array.
+    Intenta añadir un elemento undefined a un array usando push.
+
+    2. El método .pop() (Eliminar el último)
+    Crea un array con 3 ciudades y elimina la última.
+    Guarda el elemento eliminado por pop() en una variable llamada ultimoElemento.
+    Dado [10, 20, 30], usa pop() dos veces. ¿Qué queda en el array?
+    Crea un array de tareas, saca la última y muéstrala en un mensaje: "Completada: [tarea]".
+    Usa pop() en un array vacío. ¿Qué valor devuelve?
+    Crea un array de 5 números y usa un bucle para vaciarlo usando pop().
+    Dado un array de notas musicales, elimina la última y añade una nueva con push.
+    Escribe una función llamada quitarUltimo que haga pop y retorne el array modificado.
+    Crea un array con los días de la semana y elimina el "Domingo".
+    Elimina el último elemento de un array de objetos y muestra solo el nombre de ese objeto eliminado.
+
+    3. El método .shift() (Eliminar el primero)
+    Dado ["Enero", "Febrero", "Marzo"], elimina "Enero".
+    Crea un array de turnos de espera y usa shift() para "atender" al primer cliente.
+    Guarda el elemento eliminado por shift() en una variable y muéstrala.
+    Usa shift() en un array de un solo elemento. ¿Cómo queda el array?
+    Crea un array de 5 pasos para una receta y elimina el primero tras "realizarlo".
+    Combina pop() y shift() en un array de 4 elementos para dejar solo los dos centrales.
+    Crea un bucle que use shift() hasta que el array de mensajes esté vacío.
+    Dado [true, false, true], elimina el primer valor booleano.
+    Investiga si pop() es más rápido que shift() en arrays muy grandes y explica por qué.
+    Crea una función que reciba un array, use shift() y retorne el elemento extraído.
+
+    4. El método .unshift() (Añadir al principio)
+    Crea un array [2, 3, 4] y añade el 1 al principio.
+    Añade los números -2 y -1 al principio de un array en una sola operación.
+    Dado un array de mensajes de chat, añade un mensaje de "Bienvenida" al inicio.
+    Crea un array con "Mundo" y usa unshift() para añadir "Hola".
+    ¿Qué devuelve el método unshift()? Pruébalo con console.log([1].unshift(0)).
+    Añade un objeto {id: 0} al principio de un array de usuarios.
+    Crea un array vacío y añade 3 frutas una por una usando siempre unshift(). ¿En qué orden quedan?
+    Usa un bucle para insertar los números del 5 al 1 al principio de un array vacío.
+    Dado un array de niveles de juego [2, 3], añade el "Nivel Tutorial" al inicio.
+    Escribe una función que reciba un array y le añada el string "LOG:" al principio.
+
+    5. Retos de Lógica Combinada
+    Simular una Pila (LIFO): Usa push para añadir 3 libros y pop para sacarlos uno a uno.
+    Simular una Cola (FIFO): Usa push para añadir 3 personas a una fila y shift para atenderlas.
+    Inversión manual: Dado un array, usa pop y unshift para mover el último elemento al principio.
+    Rotación inversa: Usa shift y push para mover el primer elemento al final.
+    Intercambio: Toma un array de 2 elementos y usa estos métodos para intercambiar sus posiciones.
+    Espejo: Dado [1, 2, 3], usa estos métodos para que el array termine siendo [1, 2, 3, 3, 2, 1].
+    Limpieza selectiva: Crea un array con 5 elementos, quita el primero y el último.
+    Duplicar inicio: Toma el primer elemento con shift y añádelo dos veces al principio con unshift.
+    Sustitución rápida: Elimina el último elemento y añade uno diferente en su lugar (sin usar índices).
+    El Intruso: Crea un array de animales, añade uno al principio, uno al final, y luego elimina ambos. -->
+
+
+
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+        <script>
+            let cesta = [];
+            cesta.push("pan");
+            cesta.push("leche","huevos");
+            console.log(cesta);
+
+            let numeros = [1,2,3]
+            numeros.push(4);
+            console.log(numeros);
+
+            let nombres = ["Thiago","Santaigo","Kenichi","Gian"]
+            nombres.push("Juan");
+            console.log(nombres);
+            
+            let orden = [];
+            for (z = 0; z <11; z++) {
+                orden.push(z);
+            }
+            console.log(orden);
+
+            let colores = ["verde","rojo","azul","amarrillo"]
+            color = "gris";
+            colores.push(color);
+            console.log(color);
+
+            let array = ["c","d","g"]
+            let pequeño = ["a","b"]
+            array.push(pequeño);
+            console.log(array);
+
+            function añadir(array,item){
+                array.push(item);
+                return(array);
+            }
+            let funcion = [1,2,3,4,5];
+            console.log(añadir);
+
+
+            let lista = [1,2,3,4];
+            let pus;
+            lista.push(pus);
+            console.log(lista);
+            
+
+
+        </script>
+        
+    </body>
+    </html>

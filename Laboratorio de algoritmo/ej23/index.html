@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let auto = { nombre: "corola", marca: "Toyota", año: 2016 };
+        localStorage.setItem("auto", JSON.stringify(auto));
+
+        let obj = localStorage.getItem("auto");
+        console.log(JSON.parse(obj));
+
+        let usuario = { nombre: "Ana", edad: 28 };
+        localStorage.setItem("user", JSON.stringify(usuario));
+
+        let objus = localStorage.getItem("user");
+
+        delete usuario.nombre;
+        localStorage.setItem("user", JSON.stringify(usuario))
+
+        let d = JSON.parse(localStorage.getItem("user"));
+        console.log(d);
+
+
+        let visitas = {cantidad: 1}
+        localStorage.setItem("visita", JSON.stringify(visitas))
+        if (cant_visitas = localStorage.getItem("visita"))
+
+        
+
+
+
+
+    </script>
+</body>
+
+</html>

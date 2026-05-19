@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //         Simular una Pila (LIFO): Usa push para añadir 3 libros y pop para sacarlos uno a uno.
+        // Simular una Cola (FIFO): Usa push para añadir 3 personas a una fila y shift para atenderlas.
+        // Inversión manual: Dado un array, usa pop y unshift para mover el último elemento al principio.
+        // Rotación inversa: Usa shift y push para mover el primer elemento al final.
+        // Intercambio: Toma un array de 2 elementos y usa estos métodos para intercambiar sus posiciones.
+        // Espejo: Dado [1, 2, 3], usa estos métodos para que el array termine siendo [1, 2, 3, 3, 2, 1].
+        // Limpieza selectiva: Crea un array con 5 elementos, quita el primero y el último.
+        // Duplicar inicio: Toma el primer elemento con shift y añádelo dos veces al principio con unshift.
+        // Sustitución rápida: Elimina el último elemento y añade uno diferente en su lugar (sin usar índices).
+        // El Intruso: Crea un array de animales, añade uno al principio, uno al final, y luego elimina ambos.
+
+        let c1;
+        let pila = [];
+        let num = 0;
+        pila.push("libro1", "libro2", "libro3");
+        for (c1 = 0; c1 < 3; c1++) {
+            pila.pop();
+        }
+        console.log(pila);
+
+        let cola = []
+        cola.push("Pepe", "Loca", "Falo");
+
+        cola.shift();
+        console.log(cola);
+
+        let lista = [1, 2, 3, 4, 5, 6]
+        let ulti = lista.pop();
+        let primero = lista.shift();
+        lista.push(primero);
+        lista.unshift("ultimo")
+        console.log(lista);
+
+        let dos = [1, 2]
+        let x = lista.pop();
+        let c = lista.shift();
+        lista.push(c);
+        lista.unshift(x)
+        console.log(dos);
+
+        let espejo = [1, 2, 3]
+        let inverter = [3, 2, 1]
+        espejo.push(inverter);
+        console.log(espejo);
+
+        let cinco = [1, 2, 3, 4, 5]
+        cinco.pop();
+        cinco.shift();
+        console.log(cinco);
+
+        let duplicar = [2, 23, 4]
+        let i = duplicar.shift();
+        duplicar.unshift(i)
+        console.log(duplicar);
+
+        let sacarUltimo = [1, 2, 3, 4, 5, 6]
+        sacarUltimo.pop();
+        sacarUltimo.push("Cambiado")
+        console.log(sacarUltimo);
+
+
+
+        let aniamles = ["Perro", "Gato", "Cocodrilo", "Tigre"];
+        aniamles.push("Rana");
+        aniamles.unshift("Mapache");
+        console.log(aniamles);
+        aniamles.pop();
+        aniamles.shift();
+        console.log(aniamles);
+
+
+
+    </script>
+</body>
+
+</html>
