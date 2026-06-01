@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let asencor = {
+            pisoActual:0,
+            viajarA(pisoDestino) {
+                if (asencor.pisoActual == pisoDestino)
+                    console.log("Usted ya esta en este piso");
+                if (pisoDestino > 10 || pisoDestino < 0 ) 
+                    console.log("Error: El piso destino no existe en este edificio.");
+                
+                else {
+                    if (asencor.pisoActual > pisoDestino) {
+                        for (this.pisoActual = this.pisoActual; this.pisoActual >= pisoDestino; this.pisoActual--){
+                            console.log("Usted esta pasando por el piso " + this.pisoActual)
+                        }   }
+                    else if (asencor.pisoActual < pisoDestino) {
+                        for (this.pisoActual = this.pisoActual;  this.pisoActual <= pisoDestino; this.pisoActual++){
+                            console.log("Usted esta pasando por el piso " + this.pisoActual)
+                        } }
+                
+                    console.log("Ya llego al piso")    
+                }
+            }
+        }
+
+        asencor.viajarA(7);
+        
+    </script>
+</body>
+</html>

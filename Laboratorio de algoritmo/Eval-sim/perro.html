@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        let perro = {
+            hambre: 50,
+            darAlimetno(tipoComida) {
+                let hambres = this.hambre;
+                if (this.hambre == 0) {
+                    console.log("El perro esta feliz y lleno")
+                }
+                else {
+                    switch (tipoComida) {
+                        case "balanceado":
+                            hambres = hambres - 10;
+                            break;
+                        case "carne":
+                            hambres = hambres - 25;
+                            break;
+                        case "caramelo":
+                            hambres = hambres +5;
+                            break;
+                        default:
+                            console.log("El perro no reconoce la comida");
+                    }
+                }
+                console.log("El perro tiene " + hambres + " de hambre");
+            }
+        }
+        perro.darAlimetno("carne");
+
+    </script>
+</body>
+
+</html>

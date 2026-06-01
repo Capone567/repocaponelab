@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let celular = {
+            bateria: 100,
+            jugar(){
+                while (this.bateria >= 15){
+                    this.bateria = this.bateria - 5;
+                    console.log("Jugando... Bateria restante: " + this.bateria);
+                }
+                if (this.bateria == 0)
+                    console.log("El celular se apago");
+                else
+                    console.log("¡Batería baja! Por favor, conecta el cargador.");
+            }
+        }
+        celular.jugar();
+    </script>
+</body>
+</html>
