@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        function calcularEdad(nacimiento) {
+                let hoy = new Date("2026-06-02");
+                let edad = hoy.getFullYear() - nacimiento.getFullYear();
+                if (hoy.getMonth() < nacimiento.getMonth()){
+                    edad--
+                };
+                return(edad);
+
+            }
+        let persona1 = {nombre: "Thiago",apellido: "Capone",fechaDeNacimiento: new Date("2009-09-02")}
+        let persona2 = {nombre: "Martin",apellido: "Martinez",fechaDeNacimiento: new Date("2001-09-02")}
+        let persona3 = {nombre: "Diego",apellido: "Luis",fechaDeNacimiento: new Date("2008-09-02")}
+        let persona4 = {nombre: "Carlos",apellido: "Gonza",fechaDeNacimiento: new Date("2000-09-02")}
+        
+        let lista = [persona1,persona2,persona3,persona4];
+        for (let i=0; i < lista.length; i++){
+            let eda = calcularEdad(lista[i].fechaDeNacimiento);
+            if (eda < 18){
+                console.log(lista[i].nombre + " " + lista[i].apellido + " es menor");
+            }
+        }
+    </script>
+</body>
+</html>
