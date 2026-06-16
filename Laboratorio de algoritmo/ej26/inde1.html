@@ -1,0 +1,75 @@
+<script>
+let contadorMayores = 0;
+const nombresMayores = [];
+// Creamos los objetos individuales
+const persona1 = {
+    nombre: "Juan",
+    apellido: "Pérez",
+    fechaNacimiento: new Date("2005-04-15"), // Mayor de edad
+    calcularEdad: function() {
+        const hoy = new Date();
+        let edad = hoy.getFullYear() - this.fechaNacimiento.getFullYear();
+        const mes = hoy.getMonth() - this.fechaNacimiento.getMonth();
+       
+        // Si no ha llegado su mes de cumpleaños, o es su mes pero no el día, restamos 1 año
+        if (mes < 0 || (mes === 0 && hoy.getDate() < this.fechaNacimiento.getDate())) {
+            edad--;
+        }
+        return edad;
+    }
+};
+
+const persona2 = {
+    nombre: "María",
+    apellido: "Gómez",
+    fechaNacimiento: new Date("2010-11-22"), // Menor de edad
+    calcularEdad: function() {
+        const hoy = new Date();
+        let edad = hoy.getFullYear() - this.fechaNacimiento.getFullYear();
+        const mes = hoy.getMonth() - this.fechaNacimiento.getMonth();
+        if (mes < 0 || (mes === 0 && hoy.getDate() < this.fechaNacimiento.getDate())) {
+            edad--;
+        }
+        return edad;
+    }
+};
+
+const persona3 = {
+    nombre: "Carlos",
+    apellido: "López",
+    fechaNacimiento: new Date("1990-08-05"), // Mayor de edad
+    calcularEdad: function() {
+        const hoy = new Date();
+        let edad = hoy.getFullYear() - this.fechaNacimiento.getFullYear();
+        const mes = hoy.getMonth() - this.fechaNacimiento.getMonth();
+        if (mes < 0 || (mes === 0 && hoy.getDate() < this.fechaNacimiento.getDate())) {
+            edad--;
+        }
+        return edad;
+    }
+};
+
+// Almacenamos en el vector (array)
+const listaPersonas = [persona1, persona2, persona3];
+
+/*
+for(x = 0; x < listaPersonas.length; x++) {
+    listaPersonas[x].
+}
+*/
+
+
+listaPersonas.forEach(persona => {
+    const edadExacta = persona.calcularEdad();
+   
+    if (edadExacta >= 18) {
+        contadorMayores++;
+        nombresMayores.push(`${persona.nombre} ${persona.apellido} (${edadExacta} años)`);
+    }
+});
+
+// Resultados en consola
+console.log(`--- Resultados ---`);
+console.log(`Total de personas mayores de edad: ${contadorMayores}`);
+console.log(`Nombres:`, nombresMayores);
+</script>

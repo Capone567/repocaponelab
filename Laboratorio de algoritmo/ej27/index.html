@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <script>
+        //1. Gestión de Stock y Productos Vencidos
+        //Contexto: Automatizar el control de caducidad en el inventario de un comercio de alimentos.
+        //Consigna:
+        //Definir 3 objetos individuales (producto1, producto2, producto3). Cada uno debe poseer las propiedades: nombre, precio, fechaVencimiento (objeto Date) y un método interno estaVencido() que compare la fecha actual con la de vencimiento, retornando true o false.
+        //Agrupar los objetos dentro de un array llamado inventario.
+        //Utilizar un bucle de recorrido (forEach o for) para evaluar cada elemento. Contar cuántos productos están vencidos y almacenar en un nuevo array secundario (productosRetirar) los nombres de los productos caducados junto a su precio de venta.
+        //Imprimir en la consola el total de productos vencidos y la lista con sus descripciones.
+        let cantidadVencidos = 0;
+        let productosRetirar = [];
+        let producto1 = {
+            nombre: "papas",
+            precio: 100,
+            fechaVencimiento: new Date("2-10-2026"),
+            estaVencido() {
+                const hoy = new Date();
+                if (this.fechaVencimiento.getTime() > hoy.getTime()) {
+                    return false;
+                }
+                else if (this.fechaVencimiento.getTime() < hoy.getTime())
+                    return true;
+            }
+        }
+        let producto2 = {
+            nombre: "coca",
+            precio: 150,
+            fechaVencimiento: new Date("9-01-2029"),
+            estaVencido() {
+                const hoy = new Date();
+                if (this.fechaVencimiento.getTime() > hoy.getTime()) {
+                    return false;
+                }
+                else if (this.fechaVencimiento.getTime() < hoy.getTime())
+                    return true;
+            }
+        }
+        let producto3 = {
+            nombre: "leche",
+            precio: 10,
+            fechaVencimiento: new Date("1-10-2006"),
+            estaVencido() {
+                const hoy = new Date();
+                if (this.fechaVencimiento.getTime() > hoy.getTime()) {
+                    return false;
+                }
+                else if (this.fechaVencimiento.getTime() < hoy.getTime())
+                    return true;
+            }
+        }
+
+        let inventario = [producto1, producto2, producto3];
+
+        inventario.forEach(producto => {
+            let estado = producto.estaVencido()
+            if (estado == true) {
+                cantidadVencidos++;
+                productosRetirar.push(producto.nombre);
+            }
+
+        });
+        console.log(cantidadVencidos);
+        console.log(productosRetirar);
+    </script>
+</body>
+
+</html>

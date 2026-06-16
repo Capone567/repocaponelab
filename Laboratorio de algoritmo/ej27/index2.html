@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Flota de Logística y Alertas de Mantenimiento
+    Contexto: Alertas automatizadas para vehículos de transporte que requieren servicio técnico mecánico urgente según
+    su nivel de kilometraje.
+    Consigna:
+    Estructurar 3 objetos que representen unidades vehiculares, provistos de: patente, marca, kilometrajeActual,
+    ultimoMantenimientoKm y un método evaluador denominado requiereRevision(). Este método calculará la diferencia de
+    kilometraje; si es igual o superior a 10,000 km, devolverá true.
+    Disponer las unidades dentro de un array unificado llamado flota.
+    Recorrer la flota identificando aquellos vehículos bajo condición crítica. Contabilizar el total y almacenar en un
+    array llamado alertasMantenimiento la patente del vehículo junto con los kilómetros excedidos respecto al límite
+    admisible.
+    Desplegar en consola el balance final de alertas operativas.
+    <script>
+        let auto1 = {
+            patente: 123,
+            marca: "toyota",
+            kilometrajeActual: 1000,
+            ultimoMantenimiento: new Date ("11-12-2009"),
+            requiereRevision(){
+                if (this.kilometrajeActual >= 10000){
+                    return true;
+                }
+            }
+        }
+        let auto2 = {
+            patente: 321,
+            marca: "Ford",
+            kilometrajeActual: 100000,
+            ultimoMantenimiento: new Date ("12-12-2020"),
+            requiereRevision(){
+                if (this.kilometrajeActual >= 10000){
+                    return true;
+                }
+            }
+        }
+        let auto3 = {
+            patente: 456,
+            marca: "toyota",
+            kilometrajeActual: 1000000,
+            ultimoMantenimiento: new Date ("1-12-2026"),
+            requiereRevision(){
+                if (this.kilometrajeActual >= 10000){
+                    return true;
+                }
+            }
+        }
+        flota = [auto1,auto2,auto3]
+        flota.forEach(auto => {
+            
+        });
+    </script>
+</body>
+
+</html>

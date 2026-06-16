@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    2. Rendimiento Académico y Cuadro de Honor
+    Contexto: Diseñar un sistema básico para registrar y clasificar el rendimiento de una cohorte estudiantil.
+    Consigna:
+    Crear 3 objetos de tipo estudiante. Cada estructura debe contener: nombre, apellido, un array con 3 notas numéricas
+    (calificaciones) y un método integrado obtenerPromedio() que calcule y devuelva el promedio aritmético exacto de sus
+    notas.
+    Almacenar los objetos dentro de una estructura indexada denominada listaClase.
+    Declarar una variable acumuladora contadorAprobados = 0 y un array vacío denominado cuadroHonor.
+    Iterar sobre listaClase. Si el promedio de un alumno es igual o mayor a 7, incrementar el contador y agregar al
+    cuadroHonor una cadena formateada estrictamente como: "Apellido, Nombre (Promedio: X)".
+    Presentar en la consola los resultados estadísticos finales y la nómina de alumnos destacados.
+
+    <script>
+        let contadorAprobados = 0;
+        let cuadroHonor = [];
+        let sum = 0;
+        let sum1 = 0;
+        let sum2 = 0;
+        let alumno1 = {
+            nombre: "perez",
+            apellido:"gonza",
+            notas: [9,6,9],
+            obtenerPromedio(){
+                this.notas.forEach(notas => {
+                    sum += notas;
+                });
+            sum = sum / 3;
+            return parseInt(sum);
+            }
+        }
+        let alumno2 = {
+            nombre: "Nahuel",
+            apellido:"mario",
+            notas: [10,10,7],
+            obtenerPromedio(){
+                this.notas.forEach(notas => {
+                    sum1 += notas;
+                }); 
+            sum1 = sum1 / 3;
+            return parseInt(sum1);
+            }
+        }
+         
+        let alumno3 = {
+            nombre: "diego",
+            apellido:"salina",
+            notas: [1,1,1],
+            obtenerPromedio(){
+                this.notas.forEach(notas => {
+                    sum2 += notas;
+                });
+            sum2 = sum2 / 3;
+            return parseInt(sum2);
+            }
+        }
+
+        let listaClase = [alumno1,alumno2,alumno3]
+
+        listaClase.forEach (alumno => {
+            let promedio = alumno.obtenerPromedio()
+            if (promedio >= 7) {
+                contadorAprobados++;
+                cuadroHonor.push(alumno.nombre + " " + alumno.apellido +" " + "promedio:" + alumno.obtenerPromedio())
+            }
+        })
+
+        console.log(contadorAprobados);
+        console.log(cuadroHonor);
+       
+    </script>
+</body>
+
+</html>
