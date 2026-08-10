@@ -21,13 +21,14 @@
     admisible.
     Desplegar en consola el balance final de alertas operativas.
     <script>
+        let alertasMantenimiento = [];
         let auto1 = {
             patente: 123,
             marca: "toyota",
             kilometrajeActual: 1000,
-            ultimoMantenimiento: new Date ("11-12-2009"),
-            requiereRevision(){
-                if (this.kilometrajeActual >= 10000){
+            ultimoMantenimiento: new Date("11-12-2009"),
+            requiereRevision() {
+                if (this.kilometrajeActual >= 10000) {
                     return true;
                 }
             }
@@ -36,9 +37,9 @@
             patente: 321,
             marca: "Ford",
             kilometrajeActual: 100000,
-            ultimoMantenimiento: new Date ("12-12-2020"),
-            requiereRevision(){
-                if (this.kilometrajeActual >= 10000){
+            ultimoMantenimiento: new Date("12-12-2020"),
+            requiereRevision() {
+                if (this.kilometrajeActual >= 10000) {
                     return true;
                 }
             }
@@ -47,17 +48,22 @@
             patente: 456,
             marca: "toyota",
             kilometrajeActual: 1000000,
-            ultimoMantenimiento: new Date ("1-12-2026"),
-            requiereRevision(){
-                if (this.kilometrajeActual >= 10000){
+            ultimoMantenimiento: new Date("1-12-2026"),
+            requiereRevision() {
+                if (this.kilometrajeActual >= 10000) {
                     return true;
                 }
             }
         }
-        flota = [auto1,auto2,auto3]
+        flota = [auto1, auto2, auto3]
         flota.forEach(auto => {
-            
+            if (auto.requiereRevision() == true) {
+                alertasMantenimiento.push("Patente: "+auto.patente + " Kilometraje: " + auto.kilometrajeActual)
+            }
+
         });
+        console.log("Cantidad de vehiculos en estado de alerta: " + alertasMantenimiento.length);
+        console.log(alertasMantenimiento);
     </script>
 </body>
 

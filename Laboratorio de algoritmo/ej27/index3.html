@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Antigüedad de Personal y Asignación de Bonos
+    Contexto: El departamento de Recursos Humanos requiere liquidar un beneficio económico extraordinario para aquellos
+    trabajadores con una trayectoria consolidada.
+    Consigna:
+    Diseñar 3 objetos de tipo empleado con los campos: nombre, puesto, fechaIngreso (objeto Date) y un método
+    calcularAntiguedad() que compute el tiempo transcurrido en años con precisión de meses respecto a la fecha del
+    sistema actual.
+    Consolidar el equipo en un array general denominado plantilla.
+    Implementar un proceso iterativo de filtrado sobre la plantilla para extraer a los profesionales con 5 o más años de
+    antigüedad comprobada.
+    Incrementar un contador de beneficiarios y confeccionar un array estructurado como beneficiariosBono que registre el
+    nombre del empleado y su antigüedad exacta. Emitir los resultados en la consola de depuración.
+    <script>
+        let empleado1 = {
+            nombre: "Delta",
+            puesto: "Creativo",
+            fechaIngreso: new Date ("11-11-2009"),
+            calculaAntiguedad() {
+                let tiempo;
+                let hoy = new Date();
+              tiempo = hoy - this.fechaIngreso;
+                return tiempo.getFullYear();
+            }
+        }
+        console.log( empleado1.calculaAntiguedad());
+    </script>
+</body>
+
+</html>

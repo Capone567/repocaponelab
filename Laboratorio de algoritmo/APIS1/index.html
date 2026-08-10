@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    Drama <input class="categorias" type="checkbox" value="Drama" checked>
+    Comedia <input class="categorias" type="checkbox" value="Comedy" checked>
+    Romance <input class="categorias" type="checkbox" value="Romance" checked>
+    Accion <input class="categorias" type="checkbox" value="Action" checked>
+    Animacion <input class="categorias" type="checkbox" value="Animation" checked>
+    Crimen <input class="categorias" type="checkbox" value="Crieme" checked>
+    Aventura <input class="categorias" type="checkbox" value="Adventure" checked>
+    Suspenso <input class="categorias" type="checkbox" value="Suspence" checked>
+    Fantacia <input class="categorias" type="checkbox" value="Fantacy" checked>
+    <div id="contenedor"></div>
+    <div id="contenedor"></div>
+    <script>
+        async function obtenerDatos() {
+            try {
+                const url = categoria === '/'
+                    ? "https://devsapihub.com/api-movies/&quot; 
+                    : "https://devsapihub.com/api-movies/genre&quot + categoria;
+                const res = await fetch(url);
+                const datos = await res.json();
+                let str = ''
+                datos.forEach(pelicula => {
+                    let titulo = pelicula.title;
+                    let img = pelicula.image_url;
+                    str += `
+                    <div class = 'card'>
+                        <h2>${titulo}</h2>
+                        <img src="${img}" alt="${titulo}">
+                    </div>
+                    `;
+                });
+
+                document.getElementById("contenedor").innerHTML = str;
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        obtenerDatos('/');
+        const botonesCategoria = document.querySelectorAll(".categorias");
+        botonesCategoria.forEach(checkbox => {
+            checkbox.addEventListener("change", function () {
+                let generosSeleccionados = [];
+                botonesCategoria.forEach(cb => {
+                    if (cb.checked) {
+                        generosSeleccionados.push(cb.value); // Sumamos el valor (ej: "Drama")
+                    }
+                });
+                if (generosSeleccionados.length > 0) {
+                    let subUrl = '/' + generosSeleccionados.join(',');
+                    obtenerDatos(subUrl);
+                } else {
+                    obtenerDatos('/');
+                }
+            });
+        });
+
+
+
+    </script>
+</body>
+<style>
+    :root {
+        --bg-main: #0f172a;
+        --bg-card: #1e293b;
+        --text-main: #f8fafc;
+        --accent-glow: rgba(56, 189, 248, 0.35);
+    }
+
+    body {
+        font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+        background-color: var(--bg-main);
+        color: var(--text-main);
+        margin: 0;
+        padding: 2rem;
+        min-height: 100vh;
+    }
+
+    .card {
+        background-color: var(--bg-card);
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.5);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        /* Evita que la imagen se deforme o estire */
+        display: block;
+        border-bottom: 2px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .card h2 {
+        font-size: 1.1rem;
+        font-weight: 600;
+        margin: 0;
+        padding: 1.2rem 1rem;
+        text-align: center;
+        /* Centrado vertical y horizontal del texto */
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-grow: 1;
+        line-height: 1.4;
+        letter-spacing: 0.5px;
+    }
+
+    #contenedor {
+        display: grid;
+        /* Crea columnas automáticas de mínimo 220px y máximo el espacio disponible */
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .card :hover {
+        transform: translateY(-8px) scale(1.02);
+        box-shadow: 0 15px 25px -5px var(--accent-glow);
+        border-color: rgba(56, 189, 248, 0.5);
+    }
+</style>
+
+</html>

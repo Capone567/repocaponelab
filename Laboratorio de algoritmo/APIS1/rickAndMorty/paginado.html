@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="botones"></div>
+
+    <div id="contenedor"></div>
+    <script>
+        let btn = document.getElementById("botones");
+
+        let contenedor = document.getElementById("contenedor");
+
+
+        async function obtenerDatosInicio() {
+            try {
+                btn.innerHTML = '  ';
+                let url = `https://rickandmortyapi.com/api/character/?page=1`;
+                const res = await fetch(url);
+                let datos = await res.json();
+                console.log(datos);
+                let cantidadPages = datos.info.pages;
+                console.log(cantidadPages);
+                btn = document.getElementById("botones");
+                for (x = 1; x <= cantidadPages; x++) {
+                    btn.innerHTML +=
+                        `<button onclick="mostrarNumero(${x})">${x}</button>`
+                }
+                obtenerDatos(url);
+            }
+            catch (error) {
+                console.error("Error:", error);
+            }
+        }
+        async function obtenerDatos(url) {
+            try {
+                contenedor.innerHTML = ' ';
+                const res = await fetch(url);
+                let datos = await res.json();
+                console.log(datos);
+                datos.results.forEach(personaje => {
+                    contenedor.innerHTML +=
+                        `<div class= card> 
+                        <p>${personaje.name}</p>
+                        <p>${personaje.status}</p>
+                       <button onclick="origen('${personaje.origin.url}')">${personaje.origin.name}</button>
+                       <button onclick="origen('${personaje.location.url}')">${personaje.location.name}</button>
+                       <button onclick="episodio('${personaje.episode[0]}')">${personaje.episode[0]}</button>
+                        <img src=${personaje.image}  alt= Imagen del personaje>
+                     <div>
+                        `;
+                });
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        function mostrarNumero(numero) {
+            contenedor.innerHTML = ' ';
+            contenedor.innerHTML = `<h1>${numero}<h1>`;
+            let url = `https://rickandmortyapi.com/api/character/?page=${numero}`;
+            obtenerDatos(url);
+        }
+
+        async function origen(url) {
+            const res = await fetch(url);
+            let detalles = await res.json();
+            console.log(detalles);
+
+            btn.innerHTML = ' ';
+            btn.innerHTML = `<button onclick="obtenerDatosInicio()">Volver</button>`;
+            contenedor.innerHTML = ' ';
+
+            contenedor.innerHTML = ` 
+                <div class= card>
+                <p>${detalles.name}</p>
+                <p>${detalles.type}</p>
+                <p>${detalles.dimension}</p>
+                <div>
+                        `
+            detalles.residents.forEach(async (residente) => {
+                const res = await fetch(residente);
+                let infoResidente = await res.json();
+                //console.log(infoResidente);
+                contenedor.innerHTML += `<p>Residentes: ${infoResidente.name}</p>`;
+            });
+
+        }
+
+
+        async function episodio(url) {
+            const res = await fetch(url);
+            let detalles = await res.json();
+            console.log(detalles);
+
+            btn.innerHTML = '  ';
+            btn.innerHTML = `<button onclick="obtenerDatosInicio()">Volver</button>`;
+            contenedor.innerHTML = ' ';
+
+            contenedor.innerHTML = ` 
+                <div class= card>
+                <p>${detalles.name}</p>
+                <p>${detalles.air_date}</p>
+                <p>${detalles.episode}</p>
+                <div> `
+            detalles.characters.forEach(async (residente) => {
+                const res = await fetch(residente);
+                let infoResidente = await res.json();
+                //console.log(infoResidente);
+                contenedor.innerHTML += `<p>Residentes: ${infoResidente.name}</p>`;
+            });
+
+        }
+
+        obtenerDatosInicio();
+
+    </script>
+    <style>
+        body {
+            background-color: rgb(29, 29, 94);
+        }
+
+        .card {
+            font-variant: normal;
+            background: #1e293b;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            flex-direction: row-reverse;
+            align-items: center;
+            border: 1px solid #334155;
+            font-style: italic;
+            font-size: large;
+            font-weight: 1000;
+            color: aliceblue;
+
+        }
+    </style>
+</body>
+
+
+</html>

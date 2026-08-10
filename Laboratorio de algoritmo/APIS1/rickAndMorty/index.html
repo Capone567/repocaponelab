@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <div id="contenedor"></div>
+    <script>
+        async function obtenerDatos() {
+            try {
+                const url = "https://rickandmortyapi.com/api/character/?page=22";
+                const res = await fetch(url);
+                let datos = await res.json();
+                console.log(datos);
+
+                let nombres = datos.results.map(personaje => personaje.name.toUpperCase())
+
+                let especie = datos.results.filter(personaje => personaje.species == "Humanoid")
+
+                let ind = datos.results.find(personaje => personaje.name == "Phone-person")
+
+                //datos.results.forEach(personaje => {
+                //    const nombre = personaje.name;
+                //    const especie =  personaje.species;
+                //    const vivo = personaje.status; 
+                //console.log(`${nombre} es de especie ${especie} y esta ${vivo}` )
+                //})
+
+                let totalEpisodios = datos.results.reduce((acumulador, personaje) => {
+                    return acumulador + personaje.episode.length;
+                });
+                //console.log(ind)
+
+                let simplificado = datos.results.map(personaje => ({
+                    name: personaje.name,
+                    id: personaje.id,
+                    status: personaje.status,
+                    image: personaje.image
+                }));
+                //console.log(simplificado);
+
+                let vivosTi = datos.results.filter(personaje => personaje.status == 'alive' || personaje.origin.name == "Earth")
+
+                //console.log(vivosTi)
+
+
+                let alien = datos.results.find(personaje => personaje.species == "Alien" || personaje.status == "Alive")
+
+                //console.log(alien)
+
+                let estados = datos.results.reduce((acumulador, personaje) => {
+
+                    let estado = personaje.status;
+                    if (acumulador[estado]) {
+                        acumulador[estado] += 1;
+                    } else {
+                        acumulador[estado] = 1;
+                    }
+                    return acumulador;
+                });
+
+                //console.log(estados);
+
+                datos.results.forEach(personaje => {
+                    if (personaje.episode.length >= 2){
+                        const ca =  personaje.length 
+                        const nombre = personaje.name;
+                        console.log(`${nombre} aparece en ${ca}`)
+                    }
+                })
+
+
+
+
+                datos.results.forEach(personaje => {
+
+                    document.getElementById("contenedor").innerHTML +=
+                        `<div class= card> 
+                        <p>${personaje.name}</p>
+                        <img src=${personaje.image}  alt=>
+                     <div>
+                        `;
+                });
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        }
+
+        obtenerDatos();
+
+
+    </script>
+    <style>
+        body {
+            background-color: gray;
+        }
+
+        .card {
+            font-variant: normal;
+            background: #1e293b;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            display: inline-block;
+            flex-direction: row-reverse;
+            align-items: center;
+            border: 1px solid #334155;
+            font-style: italic;
+            font-size: large;
+            font-weight: 1000;
+            color: aliceblue;
+
+        }
+    </style>
+</body>
+
+
+</html>
