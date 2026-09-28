@@ -1,64 +1,68 @@
 <?php
-
 ?>
 <html>
-    <div id= "resultado"></div>
+    <body> <!-- Es buena práctica incluir el body -->
+        <div id="resultado"></div>
+    </body>
 </html>
 <script>
-    
     async function cargar() {
-        try {
-            const response = await fetch('index1.php');
-            const data = await response.json();
-            console.log(data);
-            let profesorAct = 0;
+    try {
+        const res = await fetch("index1.php");
+        const data = await res.json();
 
-            const activo = data.profesores.filter(profesor => profesor.estado == 'Activo');
-            //console.log(activo);
-            let str = "";
-            const boletin = data.estudiantes.forEach(estudiante => {
-                let nombre = estudiante.nombre
-                str += `<br>${nombre}: <br>`;
-                
-                estudiante.calificaciones.forEach(materia => {
-                        let nombre_mat = materia.materia_codigo; 
-                        let nota = materia.promedio_parcial;
-                        let str2 = `${nombre_mat}: ${nota}`
-                        str += `<br>${str2}`
-                    });
-                            
+        const profesActivos = data.profesores.filter(profesor => profesor.estado == 'Activo');
+        console.log(profesActivos);
+
+        let str = "";
+
+        data.estudiantes.forEach(estudiante => {
+            str = str + estudiante.nombre + " " + estudiante.apellido + ":  <br>";
+            estudiante.calificaciones.forEach( calificacion =>{
+                str = str + calificacion.materia_codigo +  "Nota: " + calificacion.promedio_parcial + "<br>";
+                })
+            })
+        document.getElementById("resultado").innerHTML = str;
+
+        let alumnosRiesgoAusencias = data.estudiantes.filter(estudiante => ((estudiante.asistencia.dias_lectivos * 0.90) > estudiante.asistencia.presente))
+        let alumnosRiesgoNotas = data.estudiantes.filter(estudiante => {
+            let sumaNotas = 0;
+            let materias = 0;
+            estudiante.calificaciones.forEach(calificacion => {
+                sumaNotas += calificacion.promedio_parcial;
+                materias++;
             });
-            //document.getElementById("resultado").innerHTML = str;
-            str = ""
-            const alumnosRiesgo = data.estudiantes.forEach(estudiante => {
-                    var aprobado = false;
-                    
-                    let notas = 0;
-                    estudiante.calificaciones.forEach(calificacion =>{
-                        notas += calificacion.promedio_parcial;
-                    })
-                    if (notas/3 < 7)
-                        aprobado = false;
-                    else
-                        aprobado = true
-                    if (estudiante.asistencia.presente < ((estudiante.ciclo_lectivo * 90) / 100) || aprobado == false) {
-                        str = `<br>${estudiante.nombre} esta en riesgo por tener menos del 90% de asistencia o tiene menos de 7`
-                    }
+            let promedio = (sumaNotas/materias);
 
-            })
-            //document.getElementById("resultado").innerHTML = str;
+            return promedio < 7;
+        })
 
-
-            data.estudiante.asistencia.forEach(registro =>{
-                registro.presente += 1;
-                console.log(registro.presente)
-            })
-            
-
-        } catch (error) {
-            
-            console.error('Error al obtener los datos:', error);
+        console.log(alumnosRiesgoNotas);
+        console.log(alumnosRiesgoAusencias);
+    
         }
+        
+     catch(error){
+        console.error(error);
+        }
+    
+
     }
+
     cargar();
+
+
 </script>
+
+    1. Filtro de Profesores Activos
+    2. Boletín de Calificaciones por Estudiante
+    3. Alumnos en Riesgo (Asistencia < 90% o Nota < 7)
+    4. Registrar Asistencia (Modificación Local)
+    5. Carga de Nuevas Notas y Recálculo de Promedio
+    6. Buscador de Horarios por Profesor
+    7. Detalle de Curso Completo con Tutor
+    8. Asignación de Recursos (> 40 Personas)
+    9. Cálculo de Carga Horaria Total por Curso
+    10. Renderizado en HTML (Tabla Dinámica)
+
+
