@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 4 - Tienda</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; background: #f5f5f5; }
+        h1 { color: #333; }
+        h2 { color: #555; border-bottom: 2px solid #ddd; padding-bottom: 5px; }
+        section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        select, button { padding: 8px 12px; margin: 5px; font-size: 14px; }
+        button { cursor: pointer; background: #007bff; color: white; border: none; border-radius: 4px; }
+        button:disabled { background: #ccc; cursor: not-allowed; }
+        table { width: 100%; border-collapse: collapse; margin-top: 10px; }
+        th, td { padding: 10px; text-align: left; border-bottom: 1px solid #eee; }
+        th { background: #f8f9fa; }
+        .stock-bajo { color: red; font-weight: bold; }
+        .stock-cero { color: #999; }
+        .resultado { margin-top: 15px; padding: 10px; background: #e8f4e8; border-radius: 4px; }
+        .top-vendedor { background: #fff3cd; padding: 8px; margin: 5px 0; border-radius: 4px; }
+    </style>
+</head>
+<body>
+    <h1>Ejercicio 4 - Sistema de Tienda</h1>
+
+    <!-- CONSIGNA 1: Filtro de Productos y Alerta de Stock -->
+    <section id="consigna1">
+        <h2>Consigna 1: Filtro de Productos y Alerta de Stock</h2>
+        <label for="categoria">Categoria:</label>
+        <select id="categoria">
+            <option value="">Todas</option>
+        </select>
+        <button onclick="cargarProductos()">Cargar Productos</button>
+        <div id="lista-productos"></div>
+    </section>
+
+    <!-- CONSIGNA 2: Top 3 Vendedores y Total Facturado -->
+    <section id="consigna2">
+        <h2>Consigna 2: Top 3 Vendedores y Total Facturado</h2>
+        <button onclick="cargarVentas()">Cargar Ventas</button>
+        <div id="resumen-ventas"></div>
+    </section>
+
+    <!-- CONSIGNA 3: Estadisticas de Historial por Producto -->
+    <section id="consigna3">
+        <h2>Consigna 3: Estadisticas de Historial por Producto</h2>
+        <label for="producto-select">Producto:</label>
+        <select id="producto-select"></select>
+        <button onclick="cargarHistorial()">Ver Historial</button>
+        <div id="historial-producto"></div>
+    </section>
+
+    <script>
+        // ============================================================
+        // CONSIGNA 1: Filtro de Productos y Alerta de Stock
+        // ============================================================
+
+        /**
+         * cargarProductos - Obtiene productos del servidor y los muestra en el DOM
+         * Logica:
+         * 1. Lee la categoria seleccionada en el <select>
+         * 2. Hace fetch a get_productos.php con la categoria como parametro GET
+         * 3. Recorre el array de productos y crea filas de tabla
+         * 4. Si stock < 5: texto en rojo (alerta visual)
+         * 5. Si stock == 0: boton "Comprar" deshabilitado
+         */
+        async function cargarProductos() {
+            const categoria = document.getElementById('categoria').value;
+            const contenedor = document.getElementById('lista-productos');
+
+            try {
+                // Construyo la URL con query string solo si hay categoria seleccionada
+                const url = categoria
+                    ? 'get_productos.php?categoria_id=' + encodeURIComponent(categoria)
+                    : 'get_productos.php';
+
+                const res = await fetch(url);
+
+                if (!res.ok) {
+                    throw new Error('Error del servidor: ' + res.status);
+                }
+
+                const productos = await res.json();
+
+                if (productos.length === 0) {
+                    contenedor.innerHTML = '<p>No hay productos en esta categoria.</p>';
+                    return;
+                }
+
+                // Construyo la tabla HTML con columna de categoria
+                let html = '<table><tr><th>ID</th><th>Nombre</th><th>Categoria</th><th>Precio</th><th>Stock</th><th>Accion</th></tr>';
+
+                productos.forEach(p => {
+                    // Logica de alerta de stock:
+                    // - stock < 5: clase "stock-bajo" (texto rojo)
+                    // - stock == 0: clase "stock-cero" y boton deshabilitado
+                    let claseStock = '';
+                    let botonDeshabilitado = '';
+
+                    if (p.stock < 5) {
+                        claseStock = 'stock-bajo';
+                    }
+                    if (p.stock == 0) {
+                        claseStock = 'stock-cero';
+                        botonDeshabilitado = 'disabled';
+                    }
+
+                    html += '<tr>';
+                    html += '<td>' + p.id + '</td>';
+                    html += '<td>' + p.nombre + '</td>';
+                    html += '<td>' + (p.categoria || '-') + '</td>';
+                    html += '<td>$' + parseFloat(p.precio).toFixed(2) + '</td>';
+                    html += '<td class="' + claseStock + '">' + p.stock + '</td>';
+                    html += '<td><button ' + botonDeshabilitado + '>Comprar</button></td>';
+                    html += '</tr>';
+                });
+
+                html += '</table>';
+                contenedor.innerHTML = html;
+
+            } catch (error) {
+                contenedor.innerHTML = '<p style="color:red">Error: ' + error.message + '</p>';
+            }
+        }
+
+        // ============================================================
+        // CONSIGNA 2: Top 3 Vendedores y Total Facturado
+        // ============================================================
+
+        /**
+         * cargarVentas - Obtiene todas las ventas y calcula:
+         * 1. Total General Facturado = suma de (cantidad * precio_unitario) de TODAS las ventas
+         * 2. Total por vendedor = suma de (cantidad * precio_unitario) agrupado por vendedor
+         * 3. Top 3 vendedores = los 3 con mayor facturacion total
+         *
+         * Logica de procesamiento:
+         * - Recorro el array de ventas
+         * - Para cada venta calculo el subtotal: cantidad * precio_unitario
+         * - Acumulo el subtotal en el total general
+         * - Acumulo el subtotal en un objeto que agrupa por vendedor
+         * - Ordeno los vendedores por facturacion (de mayor a menor)
+         * - Tomo los primeros 3
+         */
+        async function cargarVentas() {
+            const contenedor = document.getElementById('resumen-ventas');
+
+            try {
+                const res = await fetch('get_ventas.php');
+
+                if (!res.ok) {
+                    throw new Error('Error del servidor: ' + res.status);
+                }
+
+                const ventas = await res.json();
+
+                if (ventas.length === 0) {
+                    contenedor.innerHTML = '<p>No hay ventas registradas.</p>';
+                    return;
+                }
+
+                // Paso 1: Calcular total general y agrupar por vendedor
+                let totalGeneral = 0;
+                let porVendedor = {}; // objeto: { "Ana": 1600, "Bruno": 830, ... }
+
+                ventas.forEach(v => {
+                    // subtotal de esta venta
+                    const subtotal = v.cantidad * v.precio_unitario;
+
+                    // acumulo en el total general
+                    totalGeneral += subtotal;
+
+                    // acumulo en el vendedor correspondiente
+                    // si el vendedor no existe en el objeto, lo inicializo en 0
+                    if (!porVendedor[v.vendedor]) {
+                        porVendedor[v.vendedor] = 0;
+                    }
+                    porVendedor[v.vendedor] += subtotal;
+                });
+
+                // Paso 2: Convertir el objeto a array para poder ordenarlo
+                // De { "Ana": 1600, "Bruno": 830 } a [ ["Ana", 1600], ["Bruno", 830] ]
+                let arrayVendedores = [];
+                for (let nombre in porVendedor) {
+                    arrayVendedores.push([nombre, porVendedor[nombre]]);
+                }
+
+                // Paso 3: Ordenar de mayor a menor por facturacion (posicion [1])
+                arrayVendedores.sort((a, b) => b[1] - a[1]);
+
+                // Paso 4: Tomar solo los primeros 3 (Top 3)
+                const top3 = arrayVendedores.slice(0, 3);
+
+                // Renderizar resultados
+                let html = '<div class="resultado">';
+                html += '<strong>Total General Facturado: $' + totalGeneral.toFixed(2) + '</strong>';
+                html += '</div>';
+
+                html += '<h3>Top 3 Vendedores:</h3>';
+                top3.forEach((v, i) => {
+                    html += '<div class="top-vendedor">' + (i + 1) + '. ' + v[0] + ' - $' + v[1].toFixed(2) + '</div>';
+                });
+
+                contenedor.innerHTML = html;
+
+            } catch (error) {
+                contenedor.innerHTML = '<p style="color:red">Error: ' + error.message + '</p>';
+            }
+        }
+
+        // ============================================================
+        // CONSIGNA 3: Estadisticas de Historial por Producto
+        // ============================================================
+
+        /**
+         * cargarHistorial - Obtiene el historial de ventas de un producto especifico
+         * y calcula:
+         * 1. Total de unidades vendidas = suma de todas las cantidades
+         * 2. Precio promedio de venta = promedio de los precios unitarios
+         * 3. Fecha de la ultima venta = la fecha mas reciente
+         *
+         * Logica:
+         * - Recorro el array de ventas del producto
+         * - Acumulo cantidades y precios
+         * - Comparo fechas para encontrar la mas reciente
+         */
+        async function cargarHistorial() {
+            const productoId = document.getElementById('producto-select').value;
+            const contenedor = document.getElementById('historial-producto');
+
+            if (!productoId) {
+                contenedor.innerHTML = '<p>Selecciona un producto.</p>';
+                return;
+            }
+
+            try {
+                const res = await fetch('get_historial_producto.php?producto_id=' + encodeURIComponent(productoId));
+
+                if (!res.ok) {
+                    throw new Error('Error del servidor: ' + res.status);
+                }
+
+                const ventas = await res.json();
+
+                if (ventas.length === 0) {
+                    contenedor.innerHTML = '<p>No hay ventas para este producto.</p>';
+                    return;
+                }
+
+                // Paso 1: Calcular estadisticas
+                let totalUnidades = 0;
+                let sumaPrecios = 0;
+                let ultimaFecha = '';
+
+                ventas.forEach(v => {
+                    // Acumulo unidades vendidas
+                    totalUnidades += v.cantidad;
+
+                    // Acumulo precios para despues calcular el promedio
+                    sumaPrecios += parseFloat(v.precio_unitario);
+
+                    // Comparo fechas: si esta venta es mas reciente, la guardo
+                    // Las fechas vienen como strings "YYYY-MM-DD" y se pueden comparar directamente
+                    if (v.fecha > ultimaFecha) {
+                        ultimaFecha = v.fecha;
+                    }
+                });
+
+                // Precio promedio = suma de precios / numero de ventas
+                const precioPromedio = sumaPrecios / ventas.length;
+
+                // Renderizar
+                let html = '<div class="resultado">';
+                html += '<p><strong>Total de unidades vendidas:</strong> ' + totalUnidades + '</p>';
+                html += '<p><strong>Precio promedio de venta:</strong> $' + precioPromedio.toFixed(2) + '</p>';
+                html += '<p><strong>Fecha de la ultima venta:</strong> ' + ultimaFecha + '</p>';
+                html += '</div>';
+
+                contenedor.innerHTML = html;
+
+            } catch (error) {
+                contenedor.innerHTML = '<p style="color:red">Error: ' + error.message + '</p>';
+            }
+        }
+
+        // ============================================================
+        // INICIALIZACION: Cargar productos al cargar la pagina
+        // ============================================================
+
+        /**
+         * cargarListaProductos - Llena el <select> de la Consigna 3 con los productos
+         * para que el usuario pueda seleccionar uno y ver su historial
+         */
+        async function cargarListaProductos() {
+            try {
+                const res = await fetch('get_productos.php');
+                const productos = await res.json();
+
+                const select = document.getElementById('producto-select');
+                select.innerHTML = '<option value="">Selecciona un producto</option>';
+
+                productos.forEach(p => {
+                    const option = document.createElement('option');
+                    option.value = p.id;
+                    option.textContent = p.nombre;
+                    select.appendChild(option);
+                });
+
+            } catch (error) {
+                console.log('Error cargando lista de productos:', error);
+            }
+        }
+
+        /**
+         * cargarCategorias - Llena el <select> de categorias con datos de la BD
+         * Se ejecuta al cargar la pagina para que el filtro este disponible inmediatamente
+         */
+        async function cargarCategorias() {
+            try {
+                const res = await fetch('get_categorias.php');
+                const categorias = await res.json();
+
+                const select = document.getElementById('categoria');
+                // Mantengo la opcion "Todas" y agrego las categorias de la BD
+                select.innerHTML = '<option value="">Todas</option>';
+
+                categorias.forEach(c => {
+                    const option = document.createElement('option');
+                    option.value = c.id;
+                    option.textContent = c.nombre;
+                    select.appendChild(option);
+                });
+
+            } catch (error) {
+                console.log('Error cargando categorias:', error);
+            }
+        }
+
+        // Cuando la pagina carga, ejecuto las funciones iniciales
+        window.onload = function() {
+            cargarCategorias();      // Consigna 1: llena el select de categorias
+            cargarProductos();       // Consigna 1: muestra todos los productos al inicio
+            cargarListaProductos();  // Consigna 3: llena el select de productos
+        };
+    </script>
+</body>
+</html>

@@ -6,22 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-    <?php
-    ?>
-    <script>
-    async function cargar() {
-        try{
-        const res = await fetch('datos.php');
-        const data = await res.json();
 
-        console.log(data)
-            
-        } 
-        catch(error){
-            console.log(error);
-        }
-    }
-    cargar();
+<script>
+   fetch('datos.php')
+     .then((response) => response.json())
+     .then((data) => console.log(data))
+
     </script>
+    <form action="datos.php" method = "GET">
+        <label for="pais">Ponga el nombre del pais</label>
+        <input type = "text" id = "pais" name="pais" required>
+
+        <button type= "sumbit" onclick=enviarDatos(event)>Enviar</button>
+    </form>
+
+
+
 </body>
 </html>
